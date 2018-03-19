@@ -18,6 +18,7 @@ Inputs / Initial parameters:
 Results:
 >
 ![Image text](https://github.com/rachelduan/MC-simulation-THF/blob/master/testExample/v0.1.0:M-V.png)
+<div align=center><img width="100" height="100" src="https://github.com/rachelduan/MC-simulation-THF/blob/master/testExample/v0.1.0:M-V.png"/></div>
 ![Image text](https://github.com/rachelduan/MC-simulation-THF/blob/master/testExample/v0.1.0:M-t.png)
 
 
