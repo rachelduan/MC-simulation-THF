@@ -15,10 +15,11 @@ Inputs / Initial parameters:
 <li>The corversion to end the loop is 0.6</li>
 </ol>
 
-Results:
+Current results:
 >
 ><div align=center><img width="400" height="400" src="https://github.com/rachelduan/MC-simulation-THF/blob/master/testExample/v0.1.0:M-V.png"/></div>
 ><div align=center><img width="400" height="400" src="https://github.com/rachelduan/MC-simulation-THF/blob/master/testExample/v0.1.0:M-t.png"/></div>
+><div align=center><img width="400" height="400" src="https://github.com/rachelduan/MC-simulation-THF/blob/master/testExample/v0.1.0:conversion-t.png"/></div>
 
 
 
