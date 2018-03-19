@@ -16,7 +16,8 @@ Inputs / Initial parameters:
 </ol>
 
 Results:
-![Image text](/Users/Rachel/Documents/MATLAB/MC-simulation-THF/testExample/v0.1.0/M-V.png)
-![Image text](/Users/Rachel/Documents/MATLAB/MC-simulation-THF/testExample/v0.1.0/M-t.png)
+>
+![Image text](https://github.com/rachelduan/MC-simulation-THF/blob/master/testExample/v0.1.0:M-V.png)
+![Image text](https://github.com/rachelduan/MC-simulation-THF/blob/master/testExample/v0.1.0:M-t.png)
 
 
