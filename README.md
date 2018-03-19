@@ -18,7 +18,7 @@ Inputs / Initial parameters:
 Current results:
 >
 ><div align=center><img width="400" height="400" src="https://github.com/rachelduan/MC-simulation-THF/blob/master/testExample/v0.1.0:M-V.png"/></div>
-><div align=center><img width="400" height="400" src="https://github.com/rachelduan/MC-simulation-THF/blob/master/testExample/v0.1.0:M-t.png"/></div>
+><div align=center><img width="400" height="400" src="https://github.com/rachelduan/MC-simulation-THF/blob/master/testExample/v1.0.1:M-t.png"/></div>
 ><div align=center><img width="400" height="400" src="https://github.com/rachelduan/MC-simulation-THF/blob/master/testExample/v0.1.0:conversion-t.png"/></div>
 
 
