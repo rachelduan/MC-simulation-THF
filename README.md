@@ -7,6 +7,12 @@
 <li>Plot M-t curve and "GPC curve"(needs improvement)</li>
 </ol>
 
+## v.1.1.0 (2018/3/24 14:04 +00:00)
+<ol>
+<li>Modify GPC plot</li>
+<li>Improve the program</li>
+</ol>
+
 ### test results
 Inputs / Initial parameters: 
 <ol>
