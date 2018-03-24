@@ -33,9 +33,11 @@ function Rv = plotGPC(polymer, EGDE)
 	selectedMoleculeM = lnM(selectedMolecule);
 	selectedMoleculeV = zeros(1,length(selectedMoleculeM));
 
+	length(selectedMoleculeM)
 	for i = 1:length(selectedMoleculeM)
 		mol = pos(selectedMolecule(i));
 		[coordinates, ~, ~] = generateOptimizedConfig(polymer(mol).MatPoly, polymer(mol).MatV);
+		disp(i);
 		[~, r] = getCentroid(coordinates);
 
 		selectedMoleculeV(1, i) = pi * r * r;

@@ -43,7 +43,7 @@ function [coordinates,E] = metropolis(coordinates)
 
         if mod(cnt,output) == 0
             E = [E;[cnt,currentEnergy]];
-            cnt
+            cnt;
         end
         
     end

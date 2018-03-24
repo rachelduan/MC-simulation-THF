@@ -17,9 +17,9 @@ pi1 = 1; pi2 = 0.3;             % Reaction rates for two types of reactions
 								% pi2 is the rate of a EGDE chain adding to a reaction site
 
 SetConversion = 0.6;            % When conversion reaches SetConversion, reaction terminates
-k = 10;                         % Feed ratio
+k = 100;                        % Feed ratio
 t = 0;                          % Reaction time (initialzed to be 0)
-EGDE = [1:20];                  % 1*n row vector storing the number of different EGDE units
+EGDE = [1:20];                 % 1*n row vector storing the number of different EGDE units
 originalTHFnum = size(EGDE,2)*k;% Original number of THF monomers
 THF_num = originalTHFnum;       % Current number of THF monomers
 
@@ -54,10 +54,16 @@ multiple = 2;
 count = 0;
 
 while conversion <= SetConversion
+
 	% The number of non-zero EGDE
 	% If the EGDE unit has added to another chain, its number will be set to zero
 	% If the EGDE forms a ring, its number will be set nagative (times -1)
 	polymer_num = sum(EGDE~=0);  
+
+	if THF_num + polymer_num == ceil((originalTHFnum + size(EGDE, 2)) / 2)
+		[polymer,EGDE,THF_num,originalTHFnum] = sampleDuplicate(polymer,EGDE,THF_num,originalTHFnum,multiple); 
+		dupTimes = dupTimes + 1;
+	end
 
 	%% 
 	a1 = pi1*THF_num*polymer_num / power(multiple,dupTimes);
@@ -96,19 +102,13 @@ while conversion <= SetConversion
 
 
 	[Mn, Mw, B] = retrieve(polymer, EGDE);
-	Params(:,ed) =  [conversion;Mn;Mw;B;t];
+	Params(:,ed) =  [conversion;Mn;Mw;B / power(multiple,dupTimes);t];
 
 
 	conversion = (originalTHFnum - THF_num) / originalTHFnum;
 	p = (originalTHFnum - THF_num) / (originalTHFnum + size(EGDE,2));
 	t = t+dt;
 
-	
-	if abs(p - 0.5) < 0.000001
-		[polymer,EGDE,THF_num,originalTHFnum] = sampleDuplicate(polymer,EGDE,THF_num,originalTHFnum,multiple); 
-		dupTimes = dupTimes + 1;
-	end
-	
 	
 	if ed >= size(Params,2)
 		newP = zeros(size(Params));
