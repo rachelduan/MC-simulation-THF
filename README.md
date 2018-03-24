@@ -13,19 +13,7 @@
 <li>Improve the program</li>
 </ol>
 
-### test results
-Inputs / Initial parameters: 
-<ol>
-<li>Set initial EGDE number to be 20</li>
-<li>Set initial THF number to be 20 * 100</li>
-<li>The corversion to end the loop is 0.6</li>
-</ol>
 
-Current results:
->
-><div align=center><img width="400" height="400" src="https://github.com/rachelduan/MC-simulation-THF/blob/master/testExample/v0.1.0:M-V.png"/></div>
-><div align=center><img width="400" height="400" src="https://github.com/rachelduan/MC-simulation-THF/blob/master/testExample/v1.0.1:M-t.png"/></div>
-><div align=center><img width="400" height="400" src="https://github.com/rachelduan/MC-simulation-THF/blob/master/testExample/v0.1.0:conversion-t.png"/></div>
 
 
 
