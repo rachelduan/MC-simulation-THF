@@ -2,17 +2,16 @@ function [Mn,Mw,B] = retrieve(polymer, EGDE)
     Mn = 0;
     Mw = 0;
     B = 0;
-    for i = 1:size(polymer,2)
-        if length(polymer(i).MatPoly) ~= 0
-            [M, Bi] = retrievePara(polymer(i).MatPoly,polymer(i).MatV);
-            Mn = Mn + M;
-            Mw = Mw + M*M;
-            B = B + Bi;
-        end
+    pos = find(EGDE);
+    for i = 1:size(pos,2)
+        [M, Bi] = retrievePara(polymer(pos(i)).MatPoly,polymer(pos(i)).MatV);
+        Mn = Mn + M;
+        Mw = Mw + M*M;
+        B = B + Bi;
     end
 
     Mw = Mw / Mn ;
-    Mn = Mn / sum(EGDE>0);
+    Mn = Mn / sum(EGDE~=0);
 end
 
 function [M, Bi] = retrievePara(MatPoly,MatV,EGDE)
@@ -22,8 +21,8 @@ function [M, Bi] = retrievePara(MatPoly,MatV,EGDE)
     Negde = length(MatPoly);
 
     M = Mthf*Nthf+Megde*Negde;
-    Bi = length(MatV);
-    if(size(find(MatPoly(:,1))) ~= 0)
+    Bi = size(MatV, 2);
+    if(length(find(MatPoly(:, 1))) == 0)
     	Bi = Bi-1;
     end
 end

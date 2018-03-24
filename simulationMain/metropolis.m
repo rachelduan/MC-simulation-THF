@@ -5,7 +5,7 @@ function [coordinates,E] = metropolis(coordinates)
 	num = size(coordinates,2);
 	step = 10;
 	new_pos = zeros(3,1);
-    disp('calculate systemEnergy.');
+    
 	originalEnergy = systemEnergy(coordinates);
 	currentEnergy = originalEnergy;
     cntend = 1000;
@@ -38,30 +38,26 @@ function [coordinates,E] = metropolis(coordinates)
                 accepted = accepted+1;
                 %disp('accepted.');
             end
-            %randnum
-            %exp(-deltaEnergy*1000/(k*T))
-
+            
         end
 
         if mod(cnt,output) == 0
             E = [E;[cnt,currentEnergy]];
             cnt
-            %disp('system paused. press enter to continue.\n');
-            %pause;
         end
         
     end
 end
 
 function sysE = systemEnergy(coordinates)
-    len = size(coordinates,2)
+    len = size(coordinates,2);
     sysE = 0;
     for i = 1:len
         for j = i+1:len
             sysE = sysE + molecularForce(coordinates,i,j);
         end
     end
-    disp('end of systemEnergy.');
+    
 end
 
 

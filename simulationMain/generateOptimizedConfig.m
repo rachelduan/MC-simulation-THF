@@ -1,7 +1,5 @@
 function [coordinates,d,E] = generateOptimizedConfig(MatPoly, MatV)
 
-    disp('generate coordinates.');
-
 	Rthf = 3;
     Regde = 4;
     %检查输入矩阵维度是否正确，不正确则退出函数
@@ -49,9 +47,8 @@ function [coordinates,d,E] = generateOptimizedConfig(MatPoly, MatV)
         pos = find(MatPoly(root(1,1),:));
         len = length(pos);
         cnt = 1;
-        %生成第一个thf点坐标   
-        
 
+        %生成第一个thf点坐标  
         theta = unifrnd(0,2*pi);
         phi = unifrnd(0,2*pi);
         coordinates(1:3,tail_coordinates+1) = generateCoorVector(coordinates,root(2,1),theta,phi,Rthf);
@@ -117,12 +114,9 @@ function [coordinates,d,E] = generateOptimizedConfig(MatPoly, MatV)
         end
     end
 
-    disp('metropolis.');
-    
-    %pause
+
     [coordinates,E] = metropolis(coordinates);
-    %pause
-    %E
+   
     plot(E(:,1),E(:,2));
 
     d = zeros(mole_num);
@@ -134,9 +128,9 @@ function [coordinates,d,E] = generateOptimizedConfig(MatPoly, MatV)
 
 
     %将coordinates矩阵的数据导出到csv文件中¸­
-    filename = '/Users/Rachel/Documents/Processing/MC_simulation_drawMol__/coordinates.csv';
-    csvwrite(filename,coordinates);
-    disp('end optimization.');
+    %filename = '/Users/Rachel/Documents/Processing/MC_simulation_drawMol__/coordinates.csv';
+    %csvwrite(filename,coordinates);
+    
 end
 
 function current_co = generateCoorVector(coordinates,parent,theta,phi,R)

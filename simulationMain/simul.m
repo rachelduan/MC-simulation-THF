@@ -12,11 +12,14 @@
 clear ; close all; clc
 
 %% Set initial parameters for simulation   
-pi1 = 1; pi2 = 1;               % Reaction rates for two types of reactions
+pi1 = 1; pi2 = 0.3;             % Reaction rates for two types of reactions
+								% pi1 is the rate of a THF unit adding to a reaction site
+								% pi2 is the rate of a EGDE chain adding to a reaction site
+
 SetConversion = 0.6;            % When conversion reaches SetConversion, reaction terminates
-k = 10;                       % Feed ratio
+k = 10;                         % Feed ratio
 t = 0;                          % Reaction time (initialzed to be 0)
-EGDE = [1:20];                 % 1*n row vector storing the number of different EGDE units
+EGDE = [1:20];                  % 1*n row vector storing the number of different EGDE units
 originalTHFnum = size(EGDE,2)*k;% Original number of THF monomers
 THF_num = originalTHFnum;       % Current number of THF monomers
 
@@ -79,14 +82,15 @@ while conversion <= SetConversion
 	if reactionType == THFadded
 		polymer(polymerToBeAdded).MatV(2,EGDEadded) = polymer(polymerToBeAdded).MatV(2,EGDEadded)+1;
 		THF_num = THF_num-1;
-	
-	else 
+	else
 		pos = find(EGDE>0);
-		randnumAdding = unidrnd(length(pos));
-		polymerAdding = pos(randnumAdding);
+		if length(pos) > 0
+			randnumAdding = unidrnd(length(pos));
+			polymerAdding = pos(randnumAdding);
 
-		% randnum and randnumAdding are both index
-		[polymer,EGDE] = union(polymer,polymerToBeAdded,polymerAdding,EGDEadded,EGDE);
+			% randnum and randnumAdding are both index
+			[polymer,EGDE] = union(polymer,polymerToBeAdded,polymerAdding,EGDEadded,EGDE);
+		end
 		
 	end
 
@@ -119,9 +123,10 @@ while conversion <= SetConversion
 	end
 end
 
-%plotCurves(Params, polymer, EGDE);
-%hold on;
-GPC = plotGPC(polymer, EGDE);
+
+plotCurves(Params, polymer, EGDE);
+subplot(2,2,4)
+Rv = plotGPC(polymer, EGDE);
 
 
 	
