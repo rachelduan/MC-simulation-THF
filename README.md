@@ -13,6 +13,12 @@
 <li>Improve the program</li>
 </ol>
 
+## v.1.2.1 (2018/3/24 14:04 +00:00)
+<ol>
+<li>Modify sample duplication</li>
+</ol>
+
+
 
 
 
