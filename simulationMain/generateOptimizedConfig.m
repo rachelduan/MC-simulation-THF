@@ -1,4 +1,4 @@
-function [coordinates,d,E] = generateOptimizedConfig(MatPoly, MatV)
+function [coordinates,d,E, currentEnergy, stdEnergy] = generateOptimizedConfig(MatPoly, MatV)
 
 	Rthf = 3;
     Regde = 4;
@@ -118,6 +118,7 @@ function [coordinates,d,E] = generateOptimizedConfig(MatPoly, MatV)
     [coordinates,E] = metropolis(coordinates);
    
     plot(E(:,1),E(:,2));
+
 
     d = zeros(mole_num);
     for i = 1:mole_num

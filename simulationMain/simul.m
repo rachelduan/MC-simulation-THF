@@ -16,10 +16,10 @@ pi1 = 1; pi2 = 0.3;             % Reaction rates for two types of reactions
 								% pi1 is the rate of a THF unit adding to a reaction site
 								% pi2 is the rate of a EGDE chain adding to a reaction site
 
-SetConversion = 0.6;            % When conversion reaches SetConversion, reaction terminates
-k = 100;                        % Feed ratio
+SetConversion = 0.8;            % When conversion reaches SetConversion, reaction terminates
+k = 700;                        % Feed ratio
 t = 0;                          % Reaction time (initialzed to be 0)
-EGDE = [1:20];                 % 1*n row vector storing the number of different EGDE units
+EGDE = [1:2000];                % 1*n row vector storing the number of different EGDE units
 originalTHFnum = size(EGDE,2)*k;% Original number of THF monomers
 THF_num = originalTHFnum;       % Current number of THF monomers
 

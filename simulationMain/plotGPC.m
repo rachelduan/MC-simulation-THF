@@ -24,7 +24,7 @@ function Rv = plotGPC(polymer, EGDE)
 	[sortM, index] = sortrows(lnM',1);
 	
 
-	interval = ceil(Mlength / 10);
+	interval = 10;
 	
 	% selectNum = zeros(1, intervalNum);
 	% selectMolecule is a column vector
@@ -33,11 +33,12 @@ function Rv = plotGPC(polymer, EGDE)
 	selectedMoleculeM = lnM(selectedMolecule);
 	selectedMoleculeV = zeros(1,length(selectedMoleculeM));
 
-	length(selectedMoleculeM)
+	total = length(selectedMoleculeM)
+
 	for i = 1:length(selectedMoleculeM)
 		mol = pos(selectedMolecule(i));
 		[coordinates, ~, ~] = generateOptimizedConfig(polymer(mol).MatPoly, polymer(mol).MatV);
-		disp(i);
+		i
 		[~, r] = getCentroid(coordinates);
 
 		selectedMoleculeV(1, i) = pi * r * r;

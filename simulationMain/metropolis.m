@@ -12,7 +12,10 @@ function [coordinates,E] = metropolis(coordinates)
     output = cntend/10;
     E = [];
     accepted = 0;
-	for cnt = 1:cntend
+    cnt = 1;
+    stdEnergy = currentEnergy;
+	while 1
+
 		moleIndex = unidrnd(num);
 		%step = currentEnergy/originalEnergy*step;
         step = unifrnd(0,10);
@@ -40,12 +43,22 @@ function [coordinates,E] = metropolis(coordinates)
             end
             
         end
+        
 
         if mod(cnt,output) == 0
             E = [E;[cnt,currentEnergy]];
             cnt;
         end
-        
+
+        if mod(cnt, 100) == 0
+            if abs(currentEnergy - stdEnergy) < 0.000001
+                break;
+            else
+                stdEnergy = currentEnergy;
+            end
+        end
+
+        cnt = cnt + 1;
     end
 end
 
