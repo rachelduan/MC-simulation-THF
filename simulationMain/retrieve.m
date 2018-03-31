@@ -12,6 +12,7 @@ function [Mn,Mw,B] = retrieve(polymer, EGDE)
 
     Mw = Mw / Mn ;
     Mn = Mn / sum(EGDE~=0);
+    B = B / size(pos, 2);
 end
 
 function [M, Bi] = retrievePara(MatPoly,MatV,EGDE)

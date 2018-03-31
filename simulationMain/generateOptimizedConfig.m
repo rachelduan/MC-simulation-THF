@@ -128,9 +128,6 @@ function [coordinates,d,E, currentEnergy, stdEnergy] = generateOptimizedConfig(M
     end
 
 
-    %将coordinates矩阵的数据导出到csv文件中¸­
-    %filename = '/Users/Rachel/Documents/Processing/MC_simulation_drawMol__/coordinates.csv';
-    %csvwrite(filename,coordinates);
     
 end
 
