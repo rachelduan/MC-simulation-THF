@@ -18,9 +18,10 @@
 <li>Modify sample duplication</li>
 </ol>
 
-## v.2.1.1 (2018/3/31 09:13 +00:00)
+## v.2.2.1 (2018/3/31 10:46 +00:00)
 <ol>
 <li>First small system test</li>
+<li>Add visualization</li>
 <li>Remaining problems: File GenerateOptimizedConfig.m</li>
 </ol>
 
