@@ -1,4 +1,22 @@
-function [coordinates,d,E, currentEnergy, stdEnergy] = generateOptimizedConfig(MatPoly, MatV)
+function [coordinates,E] = generateOptimizedConfig(MatPoly, MatV)
+
+    if length(find(MatPoly(:,1))) ~= 0
+        circlePos = find(MatPoly(:,1));
+        circleTHF = MatPoly(circlePos,1); 
+        circleSeq = find(MatPoly(circlePos, :) > MatPoly(circlePos, 1));
+        if length(circleSeq) == 0
+            circleNum = length(circlePos);
+        else
+            circleNum = find(find(MatPoly(circlePos, :))==circleSeq(1)) - 1;
+        end
+        MatPoly(circlePos,1) = 0;
+    else
+        circlePos = 0; circleTHF = 0; circleSeq = []; 
+        circleNum = 0;
+    end
+
+    
+
 
 	Rthf = 3;
     Regde = 4;
@@ -34,6 +52,7 @@ function [coordinates,d,E, currentEnergy, stdEnergy] = generateOptimizedConfig(M
     Q(2,t) = 1;
 
     %当队列不为空时，进行循环
+    flag = 0;
     while(h<=t)
         %root：表示现在正在生成的节点坐标都是从root这个egde上长出来的
         %root为一个2*1矩阵，root(1,1)记录该节点在MatV中下标，root(2,1)记录该节点坐标在coordinates中下标
@@ -41,7 +60,11 @@ function [coordinates,d,E, currentEnergy, stdEnergy] = generateOptimizedConfig(M
         root = Q(:,h);
         h = h+1;
 
-        %pos：root这个egde连着的所有edge在vertex矩阵中的位置
+        if circlePos == root(1,1)
+            flag = tail_coordinates;
+        end
+
+        %pos：root这个egde连着的所有egde在vertex矩阵中的位置
         %len：表示这个egde下面连着几个egde
         %cnt：记录已经生成的thf节点数量，目的是生成最后一段thf，当这个root下面所有egde坐标和edge之间的thf都生成好了之后，生成剩下的thf坐标
         pos = find(MatPoly(root(1,1),:));
@@ -60,32 +83,38 @@ function [coordinates,d,E, currentEnergy, stdEnergy] = generateOptimizedConfig(M
             
         
         coordinates(5,tail_coordinates) = root(2,1); 
-        
+
+
 
         %通过pos_index从1到len来生成这个root下面最后一个egde以前的所有节点坐标
         for pos_index = 1:len
+            
+
             %生成thf坐标，直到遇到下一个egde
-            while(cnt<MatPoly(root(1,1),pos(pos_index))+length(find(MatPoly(root(1,1),1:pos(pos_index)))))
+            plusNum = length(find(MatPoly(root(1,1),1:pos(pos_index))));
+            if pos_index < circleNum
+                plusNum = plusNum - 1;
+            end
+
+            while(cnt < MatPoly(root(1,1),pos(pos_index))+plusNum)
                 
                 theta = unifrnd(0,2*pi);
                 phi = unifrnd(0,2*pi);
 
                 coordinates(1:3,tail_coordinates+1) = generateCoorVector(coordinates,tail_coordinates,theta,phi,Rthf);
                 coordinates(4,tail_coordinates+1) = Rthf;               
-                
-                
+            
                 coordinates(5,tail_coordinates+1) = tail_coordinates;
                 tail_coordinates = tail_coordinates+1;
                 cnt = cnt+1;
                 
             end
 
-            %将这个edge入队
+            %将这个egde入队
             t = t+1;
             Q(1,t) = pos(pos_index);
             Q(2,t) = tail_coordinates+1;
-            
-                
+
             theta = unifrnd(0,2*pi);
             phi = unifrnd(0,2*pi);
 
@@ -95,6 +124,7 @@ function [coordinates,d,E, currentEnergy, stdEnergy] = generateOptimizedConfig(M
             coordinates(5,tail_coordinates+1) = tail_coordinates;
             tail_coordinates = tail_coordinates+1;
             cnt = cnt+1;
+            
                 
         end
         %生成最后一段thf坐标
@@ -112,20 +142,28 @@ function [coordinates,d,E, currentEnergy, stdEnergy] = generateOptimizedConfig(M
             
                     
         end
+
+        if circlePos == root(1,1)
+            
+            coordinates(5, 1) = flag+circleNum+circleTHF-1;
+            coordinates(5, 1);
+            coordinates(5, flag+circleNum+circleTHF) = 1;
+        end
+
     end
 
 
     [coordinates,E] = metropolis(coordinates);
    
-    plot(E(:,1),E(:,2));
+    %plot(E(:,1),E(:,2));
 
 
-    d = zeros(mole_num);
-    for i = 1:mole_num
-        t = coordinates(1:3,:)-coordinates(1:3,i);
-        t = t.^2;
-        d(:,i) = t'*[1;1;1];
-    end
+    %d = zeros(mole_num);
+    %for i = 1:mole_num
+    %    t = coordinates(1:3,:)-coordinates(1:3,i);
+    %    t = t.^2;
+    %    d(:,i) = t'*[1;1;1];
+    %end
 
 
     

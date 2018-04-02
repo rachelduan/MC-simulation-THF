@@ -25,6 +25,11 @@
 <li>Remaining problems: File GenerateOptimizedConfig.m</li>
 </ol>
 
+## v.2.3.1 (2018/4/02 08:48 +00:00)
+<ol>
+<li>visualization of ring-structure with optimized configration</li>
+</ol>
+
 
 
 

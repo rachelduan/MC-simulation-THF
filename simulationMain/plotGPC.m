@@ -2,7 +2,7 @@ function Rv = plotGPC(polymer, EGDE)
 	Mthf = 72;
 	Megde = 174;
 
-	pos = find(EGDE>0);
+	pos = find(EGDE);
 
 	% M stores the paired information of molecular weight for each molecule
 	Mlength = length(pos);
@@ -39,7 +39,7 @@ function Rv = plotGPC(polymer, EGDE)
 
 	for i = 1:length(selectedMoleculeM)
 		mol = pos(selectedMolecule(i));
-		[coordinates, ~, ~] = generateOptimizedConfig(polymer(mol).MatPoly, polymer(mol).MatV);
+		[coordinates, ~] = generateOptimizedConfig(polymer(mol).MatPoly, polymer(mol).MatV);
 		% Save coordinates matrix to csv.­
 		filenameAll = ['/Users/Rachel/Documents/MATLAB/MC-simulation-THF/MC_simulation_drawAllMol_spin/coordinates' num2str(i-1) '.csv'];
 		csvwrite(filenameAll,coordinates);
